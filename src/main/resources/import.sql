@@ -1,0 +1,2 @@
+INSERT INTO tb_category (level1, level2, level3, level4, category_path, remove_from, session_token, sku, category_to) VALUES('1', '8', '1', '2', '3', '4', 'S', '1', '555');
+INSERT INTO tb_category (level1, level2, level3, level4, category_path, remove_from, session_token, sku, category_to) VALUES('1', '8', '1', '2', '3', '4', 'S', '1', '666');

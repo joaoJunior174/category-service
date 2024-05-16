@@ -28,15 +28,20 @@ public class CategoryService {
         return categoryDtoList;
     }
 
-    public void saveAll(List<CategoryDto> categoriesDto) {
+    public void saveAll(List<CategoryDto> categoriesDto) throws Exception {
+
+        throw new Exception("Erro ao processar mensagem");
+
+    }
+
+    public void saveAllWithNoErrors(List<CategoryDto> categoriesDto) {
         List<Category> categoryList = new ArrayList<Category>();
 
         categoriesDto.forEach(c -> {
             Category cat = new Category(c);
             categoryList.add(cat);
         });
+        categoryRepository.saveAll(categoryList);
 
-        List<Category> categorySavedList = categoryRepository.saveAll(categoryList);
-        Integer a = 10;
     }
 }
