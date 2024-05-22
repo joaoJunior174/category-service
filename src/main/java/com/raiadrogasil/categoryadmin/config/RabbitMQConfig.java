@@ -46,9 +46,20 @@ public class RabbitMQConfig {
     @Value("${rabbitmq.dlq.queue.name}")
     private String dlqQueue;
 
+    @Value("${rabbitmq.order.routingkey.name}")
+    private String orderRoutingKey;
+
+    @Value("${rabbitmq.queue.order.name}")
+    private String orderQueue;
+
     @Bean
     public Queue queue() {
         return new Queue(queue);
+    }
+
+    @Bean
+    public Queue orderQueue() {
+        return new Queue(orderQueue);
     }
 
     @Bean
@@ -77,6 +88,14 @@ public class RabbitMQConfig {
                 .bind(queue())
                 .to(exchange())
                 .with(routingKey);
+    }
+
+    @Bean
+    public Binding orderBinding() {
+        return BindingBuilder
+                .bind(orderQueue())
+                .to(exchange())
+                .with(orderRoutingKey);
     }
 
     @Bean

@@ -33,14 +33,14 @@ public class RabbitMQConsumer {
         this.rabbitTemplate = rabbitTemplate;
     }
 
-    @RabbitListener(queues = {"${rabbitmq.queue.name}"})
-    public void ConsumeJsonMessage(Message message) throws Exception {
-        try {
-            this.categoryService.saveAll(this.convertMessageToDto(message));
-        } catch (Exception e) {
-            this.rabbitTemplate.convertAndSend(exchange, routingKey, this.convertMessageToDto(message));
-        }
-    }
+//    @RabbitListener(queues = {"${rabbitmq.queue.name}"})
+//    public void ConsumeJsonMessage(Message message) throws Exception {
+//        try {
+//            this.categoryService.saveAll(this.convertMessageToDto(message));
+//        } catch (Exception e) {
+//            this.rabbitTemplate.convertAndSend(exchange, routingKey, this.convertMessageToDto(message));
+//        }
+//    }
 
     private List<CategoryDto> convertMessageToDto(Message message) throws Exception {
         String messageBody = new String(message.getBody());

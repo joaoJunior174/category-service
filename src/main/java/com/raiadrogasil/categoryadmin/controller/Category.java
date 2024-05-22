@@ -1,6 +1,7 @@
 package com.raiadrogasil.categoryadmin.controller;
 
 import com.raiadrogasil.categoryadmin.dto.CategoryDto;
+import com.raiadrogasil.categoryadmin.dto.OrderDto;
 import com.raiadrogasil.categoryadmin.publisher.RabbitMQProducer;
 import com.raiadrogasil.categoryadmin.repository.CategoryRepository;
 import com.raiadrogasil.categoryadmin.service.CategoryService;
@@ -31,6 +32,13 @@ public class Category {
 
         this.rabbitMQProducer.sendJsonMessage(categoryDtoList);
         return ResponseEntity.ok("Dado enviado para a fila com sucesso");
+    }
+
+    @PostMapping(value = "/order")
+    public ResponseEntity<String> createOrder(@RequestBody OrderDto orderDto) {
+
+        this.rabbitMQProducer.sendJsonOrderMessage(orderDto);
+        return ResponseEntity.ok("Dado de order enviado para a fila com sucesso");
     }
 
     @GetMapping(value = "/{sessionToken}")
